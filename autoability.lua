@@ -49,5 +49,5 @@ while true do
         end
     end
 end
-task.wait(0.5)
+task.wait(1)
 end
