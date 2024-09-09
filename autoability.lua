@@ -1,4 +1,4 @@
-local v1 = workspace.Game
+local v1 = game:GetService("Workspace").Game
 local v2 = v1.Towers
 local v3 = v1.Enemies
 local v4 = v1.Map.Path
