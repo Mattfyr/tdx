@@ -57,5 +57,8 @@ while true do
             game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 3, v23)
         end
     end
+    if _G.Artillery then
+        task.wait(0.5)
+    end
     task.wait(1)
 end
