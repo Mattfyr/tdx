@@ -35,14 +35,14 @@ while true do
 
     if v12 then
         local v17 = v12.Root.Position
-        local v17_CFrame = CFrame.new(Vector3.new(v17.X, v7.Position.Y, v17.Z))
+        local v17_CFrame = CFrame.new(v17.X, v7.Position.Y, v17.Z)
         local v17_Vector3 = Vector3.new(v17.X, v7.Position.Y, v17.Z)
 
         for v19 = 1, v8 do
             if _G.Artillery then
-            game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v19, v17_CFrame)
+            game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v19, v17_Vector3)
             end
-            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v19, 1)
+            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v19, 1, v17_Vector3)
             game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v19, 2)
             if _G.CommanderAirstrike then
             game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v19, 3, v17_Vector3)
