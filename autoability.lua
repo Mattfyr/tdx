@@ -1,9 +1,9 @@
-local v1 = game:GetService("Workspace").Game
-local v2 = v1.Towers
-local v3 = v1.Enemies
-local v4 = v1.Map.Path
-local v5 = v4.Spawn1
-local v6 = v4.End
+local v1 = game:GetService("Workspace"):WaitForChild("Game")
+local v2 = v1:WaitForChild("Towers")
+local v3 = v1:WaitForChild("Enemies")
+local v4 = v1:WaitForChild("Map"):WaitForChild("Path")
+local v5 = v4:WaitForChild("Spawn1")
+local v6 = v4:WaitForChild("End")
 local v7 = v4:FindFirstChild("PathHighlight") and v4.PathHighlight:FindFirstChild("Part") 
     or v1.Map:FindFirstChild("Zones") and v1.Map.Zones:FindFirstChild("Path") and v1.Map.Zones.Path:FindFirstChild("Part")
     or v1.Map:FindFirstChild("PathHighlight") and v1.Map.PathHighlight:FindFirstChild("Cube.002")
