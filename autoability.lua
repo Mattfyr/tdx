@@ -59,6 +59,7 @@ while true do
     end
     if _G.Artillery then
         task.wait(0.5)
-    end
+    else
     task.wait(1)
+    end
 end
