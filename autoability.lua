@@ -53,10 +53,8 @@ while true do
                 game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v24, v23)
             end
             game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 1, v23)
-            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 2)
-            if _G.CommanderAirstrike then
-                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 3, v23)
-            end
+            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 2, v23)
+            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 3, v23)
         end
     end
     task.wait(1)
