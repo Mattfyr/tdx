@@ -10,7 +10,6 @@ local v7 = v4:FindFirstChild("PathHighlight") and v4.PathHighlight:FindFirstChil
 
 local v8 = require(game.ReplicatedStorage:WaitForChild("TDX_Shared"):WaitForChild("Common"):WaitForChild("ResourceManager"))
 local v9 = 0
-
 while true do
     local v10 = v2:GetChildren()
     local v11 = #v10
@@ -28,12 +27,12 @@ while true do
         if v17:FindFirstChild(v17.Name) and v17[v17.Name]:FindFirstChild("Root") then
             local v18 = v8.GetEnemyConfig(v17.Name)
             local v19 = v18 and v18.Health or 0
-            
+
             if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
-            if v19 > (_G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth or 30000) then
-                v16 = true
+                if v19 > (_G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth or 30000) then
+                    v16 = true
+                end
             end
-        end
 
             if _G.Strongest then
                 if v19 > v15 then
@@ -62,7 +61,15 @@ while true do
             end
         end
 
-        if v16 then
+        if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
+            if v16 then
+                for v25 = 1, v9 do
+                    game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 1, v24)
+                    game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 2, v24)
+                    game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 3, v24)
+                end
+            end
+        else
             for v25 = 1, v9 do
                 game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 1, v24)
                 game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 2, v24)
