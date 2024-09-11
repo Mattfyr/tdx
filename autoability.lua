@@ -28,10 +28,12 @@ while true do
         if v17:FindFirstChild(v17.Name) and v17[v17.Name]:FindFirstChild("Root") then
             local v18 = v8.GetEnemyConfig(v17.Name)
             local v19 = v18 and v18.Health or 0
-
+            
+            if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
             if v19 > (_G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth or 30000) then
                 v16 = true
             end
+        end
 
             if _G.Strongest then
                 if v19 > v15 then
