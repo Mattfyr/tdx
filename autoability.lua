@@ -1,12 +1,13 @@
-local v1 = game:GetService("Workspace"):WaitForChild("Game")
-local v2 = v1:WaitForChild("Towers")
-local v3 = v1:WaitForChild("Enemies")
-local v4 = v1:WaitForChild("Map"):WaitForChild("Path")
-local v5 = v4:WaitForChild("Spawn1")
-local v6 = v4:WaitForChild("End")
+local v1 = game:GetService("Workspace").Game
+local v2 = v1.Towers
+local v3 = v1.Enemies
+local v4 = v1.Map.Path
+local v5 = v4.Spawn1
+local v6 = v4.End
 local v7 = v4:FindFirstChild("PathHighlight") and v4.PathHighlight:FindFirstChild("Part") 
     or v1.Map:FindFirstChild("Zones") and v1.Map.Zones:FindFirstChild("Path") and v1.Map.Zones.Path:FindFirstChild("Part")
     or v1.Map:FindFirstChild("PathHighlight") and v1.Map.PathHighlight:FindFirstChild("Cube.002")
+
 local v8 = require(game.ReplicatedStorage:WaitForChild("TDX_Shared"):WaitForChild("Common"):WaitForChild("ResourceManager"))
 local v9 = 0
 
@@ -17,49 +18,60 @@ while true do
     local v13
     local v14 = math.huge
     local v15 = -math.huge
+    local v16 = false
 
     if v11 > v9 then
         v9 = v11
     end
 
-    for _, v16 in ipairs(v12) do
-        if v16:FindFirstChild(v16.Name) and v16[v16.Name]:FindFirstChild("Root") then
-            if _G.Strongest then
-                local v17 = v8.GetEnemyConfig(v16.Name)
-                local v18 = v17 and v17.Health or 0
+    for _, v17 in ipairs(v12) do
+        if v17:FindFirstChild(v17.Name) and v17[v17.Name]:FindFirstChild("Root") then
+            local v18 = v8.GetEnemyConfig(v17.Name)
+            local v19 = v18 and v18.Health or 0
 
-                if v18 > v15 then
-                    v15 = v18
-                    v13 = v16[v16.Name]
+            if v19 > (_G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth or 30000) then
+                v16 = true
+            end
+
+            if _G.Strongest then
+                if v19 > v15 then
+                    v15 = v19
+                    v13 = v17[v17.Name]
                 end
             else
-                local v19 = v16[v16.Name].Root.Position
-                local v20 = (v19 - v6.Position).magnitude
-                if v20 < v14 then
-                    v14 = v20
-                    v13 = v16[v16.Name]
+                local v20 = v17[v17.Name].Root.Position
+                local v21 = (v20 - v6.Position).magnitude
+                if v21 < v14 then
+                    v14 = v21
+                    v13 = v17[v17.Name]
                 end
             end
         end
     end
 
     if v13 then
-        local v21 = v13.Root.Position
-        local v22 = CFrame.new(v21.X, v7.Position.Y, v21.Z)
-        local v23 = Vector3.new(v21.X, v7.Position.Y, v21.Z)
+        local v22 = v13.Root.Position
+        local v23 = CFrame.new(v22.X, v7.Position.Y, v22.Z)
+        local v24 = Vector3.new(v22.X, v7.Position.Y, v22.Z)
 
-        for v24 = 1, v9 do
-            if _G.Artillery then
-                game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v24, v23)
+        if _G.Artillery then
+            for v25 = 1, v9 do
+                game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v25, v24)
             end
-            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 1, v23)
-            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 2, v23)
-            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v24, 3, v23)
+        end
+
+        if v16 then
+            for v25 = 1, v9 do
+                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 1, v24)
+                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 2, v24)
+                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v25, 3, v24)
+            end
         end
     end
+
     if _G.Artillery then
         task.wait(0.5)
     else
-    task.wait(1)
+        task.wait(1)
     end
 end
