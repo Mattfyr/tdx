@@ -1,8 +1,12 @@
 if game.PlaceId == 9503261072 then
-while true do
-    task.wait(3)
-    game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/refresh")
-    task.wait(3)
-    game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/start")
-end
+    while true do
+        if not game:GetService("Players").LocalPlayer.PlayerGui.GUI.Leave.Visible then
+            game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/refresh")
+        else
+            if game:GetService("Players").LocalPlayer.PlayerGui.GUI.Leave.Visible then
+                game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/start")
+            end
+        end
+        task.wait(2.5)
+    end
 end
