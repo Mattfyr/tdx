@@ -7,6 +7,6 @@ if game.PlaceId == 9503261072 then
                 game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/start")
             end
         end
-        task.wait(2.5)
+        task.wait(3)
     end
 end
