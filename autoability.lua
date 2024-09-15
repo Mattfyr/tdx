@@ -68,30 +68,36 @@ if game.PlaceId == 11739766412 then
 
                 if _G.Artillery then
                     for v28 = 1, v8 do
-                        game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v28, v27)
+                        coroutine.wrap(function()
+                            game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v28, v27)
+                        end)()
                     end
                 end
 
                 if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
                     if v15 then
                         for v28 = 1, v8 do
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 1, v27)
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 2, v27)
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 3, v27)
+                            coroutine.wrap(function()
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 1, v27)
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 2, v27)
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 3, v27)
+                            end)()
                         end
                     end
                 else
                     for v28 = 1, v8 do
-                        game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 1, v27)
-                        game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 2, v27)
-                        game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 3, v27)
+                        coroutine.wrap(function()
+                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 1, v27)
+                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 2, v27)
+                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v28, 3, v27)
+                        end)()
                     end
                 end
             end
         end
 
         if _G.Artillery then
-            task.wait(0.5)
+            task.wait(0.2)
         else
             task.wait(1)
         end
