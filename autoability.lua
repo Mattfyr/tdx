@@ -72,6 +72,7 @@ while true do
             print("artillery is true")
             for v25 = 1, v9 do
                 game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v25, v24)
+                print("fired artillery remote")
             end
         end
 
