@@ -1,4 +1,15 @@
 if game.PlaceId == 11739766412 then
+    local v32 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sigmanic/ROBLOX/main/ModificationWallyUi", true))()
+local v33 = v32:CreateWindow("TDX Auto Ability")
+v33:Section("Toggle Auto Ability")
+v33:Toggle("Auto Ability", {flag = "AutoAbility", default = true})
+v33:Section("Settings")
+v33:Toggle("Aim Artillery", {flag = "Artillery", default = true})
+v33:Toggle("Strongest Targetting", {flag = "Strongest", default = true})
+v33:Section("Use When Health Of Enemy")
+v33:TypeBox("Use When Health Of Enemy", {flag = "UseAbilitiesOnlyWhenEnemyHasMoreThanHealth", default = 1000})
+v33:Section("Artillery Reload Time")
+v33:TypeBox("Artillery Reload Time", {flag = "ArtilleryReloadTime", default = 0.2})
     local v1 = game:GetService("Workspace").Game
     local v2 = v1.Towers
     local v3 = v1.Enemies
@@ -9,6 +20,7 @@ if game.PlaceId == 11739766412 then
     local v8 = 0
 
     while true do
+        if v33.flags.AutoAbility then
         local v9 = v2:GetChildren()
         local v10 = #v9
         local v11 = v3:GetChildren()
@@ -38,13 +50,13 @@ if game.PlaceId == 11739766412 then
                 local v22 = v7.GetEnemyConfig(v18.Name)
                 local v23 = v22 and v22.Health or 0
 
-                if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
-                    if v23 > (_G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth or 30000) then
+                if v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
+                    if v23 > (tonumber(v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth) or v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth == "" and 1000) then
                         v15 = true
-                    end
+                    end                    
                 end
 
-                if _G.Strongest then
+                if v33.flags.Strongest then
                     if v23 > v14 then
                         v14 = v23
                         v12 = v19
@@ -77,7 +89,7 @@ if game.PlaceId == 11739766412 then
                 local v29 = CFrame.new(v26.X, v16.Position.Y, v26.Z)
                 local v30 = Vector3.new(v26.X, v16.Position.Y, v26.Z)
 
-                if _G.Artillery then
+                if v33.flags.Artillery then
                     for v31 = 1, v8 do
                         coroutine.wrap(function()
                             game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v31, v30)
@@ -85,7 +97,7 @@ if game.PlaceId == 11739766412 then
                     end
                 end
 
-                if _G.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
+                if v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
                     if v15 then
                         for v31 = 1, v8 do
                             coroutine.wrap(function()
@@ -107,10 +119,13 @@ if game.PlaceId == 11739766412 then
             end
         end
 
-        if _G.ArtilleryReloadTime then
-            task.wait(_G.ArtilleryReloadTime)
+        if v33.flags.ArtilleryReloadTime then
+            task.wait(v33.flags.ArtilleryReloadTime)
         else
             task.wait(1)
         end
+    else
+        task.wait(1)
     end
+end
 end
