@@ -42,7 +42,7 @@ if game.PlaceId == 11739766412 then
                     end
                 else
                     local v21 = v18[v18.Name].Root.Position
-                    local v22 = (v21 - v6.Position).magnitude
+                    local v22 = (v21 - v6.Position).Magnitude
                     if v22 < v13 then
                         v13 = v22
                         v12 = v18[v18.Name]
