@@ -1,12 +1,12 @@
 if game.PlaceId == 11739766412 then
-    local v1 = game:GetService("Workspace"):WaitForChild("Game")
-    local v2 = v1:WaitForChild("Towers")
-    local v3 = v1:WaitForChild("Enemies")
-    local v4 = v1:WaitForChild("Map"):WaitForChild("Path")
-    local v5 = v4:WaitForChild("Spawn1")
-    local v6 = v4:WaitForChild("End")
+    local v1 = game:GetService("Workspace").Game
+    local v2 = v1.Towers
+    local v3 = v1.Enemies
+    local v4 = v1.Map.Path
+    local v5 = v4.Spawn1
+    local v6 = v4.End
     
-    local v7 = require(game.ReplicatedStorage:WaitForChild("TDX_Shared"):WaitForChild("Common"):WaitForChild("ResourceManager"))
+    local v7 = require(game.ReplicatedStorage.TDX_Shared.Common.ResourceManager)
     local v8 = 0
 
     while true do
