@@ -9,7 +9,7 @@ v33:Toggle("Strongest Targetting", {flag = "Strongest", default = true})
 v33:Section("Use When Health Of Enemy")
 v33:TypeBox("Use When Health Of Enemy", {flag = "UseAbilitiesOnlyWhenEnemyHasMoreThanHealth", default = 1000})
 v33:Section("Artillery Reload Time")
-v33:TypeBox("Artillery Reload Time", {flag = "ArtilleryReloadTime", default = 0.2})
+v33:TypeBox("Artillery Reload Time", {flag = "ArtilleryReloadTime", default = 1})
     local v1 = game:GetService("Workspace").Game
     local v2 = v1.Towers
     local v3 = v1.Enemies
