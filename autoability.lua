@@ -119,7 +119,7 @@ v33:TypeBox("Artillery Reload Time", {flag = "ArtilleryReloadTime", default = 1}
             end
         end
 
-        if v33.flags.ArtilleryReloadTime then
+        if v33.flags.Artillery then
             task.wait(v33.flags.ArtilleryReloadTime)
         else
             task.wait(1)
