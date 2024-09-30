@@ -1,131 +1,212 @@
 if game.PlaceId == 11739766412 then
-    local v32 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sigmanic/ROBLOX/main/ModificationWallyUi", true))()
-local v33 = v32:CreateWindow("TDX Auto Ability")
-v33:Section("Toggle Auto Ability")
-v33:Toggle("Auto Ability", {flag = "AutoAbility", default = true})
-v33:Section("Settings")
-v33:Toggle("Aim Artillery", {flag = "Artillery", default = true})
-v33:Toggle("Strongest Targetting", {flag = "Strongest", default = true})
-v33:Section("Use When Health Of Enemy")
-v33:TypeBox("Use When Health Of Enemy", {flag = "UseAbilitiesOnlyWhenEnemyHasMoreThanHealth", default = 1000})
-v33:Section("Artillery Reload Time")
-v33:TypeBox("Artillery Reload Time", {flag = "ArtilleryReloadTime", default = 1})
-    local v1 = game:GetService("Workspace").Game
-    local v2 = v1.Towers
-    local v3 = v1.Enemies
-    local v4 = v1.Map.Path
-    local v5 = v4.Spawn1
-    local v6 = v4.End
-    local v7 = require(game.ReplicatedStorage.TDX_Shared.Common.ResourceManager)
-    local v8 = 0
+    local v1 = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+    local v2 = v1:CreateWindow({
+        Name = "TDX Script Hub",
+        LoadingTitle = "TDX Script Hub",
+        LoadingSubtitle = "By newmattf",
+        ConfigurationSaving = {
+            Enabled = true,
+            FolderName = "TDX",
+            FileName = "Auto Ability"
+        },
+    })
+
+    local v3 = v2:CreateTab("Auto Ability")
+    local v4 = v3:CreateSection("Settings")
+
+    local v5, v6, v7, v8, v9, v10 = false, false, false, false, false, false
+    local v11 = false
+    local v13 = 30000
+    local v14 = 1
+
+    local v15 = v3:CreateToggle({
+        Name = "Toggle Auto Ability",
+        CurrentValue = false,
+        Flag = "ToggleAutoAbility",
+        Callback = function(value)
+            v5 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Use First Ability",
+        CurrentValue = false,
+        Flag = "FirstAbility",
+        Callback = function(value)
+            v6 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Use Second Ability",
+        CurrentValue = false,
+        Flag = "SecondAbility",
+        Callback = function(value)
+            v7 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Use Third Ability",
+        CurrentValue = false,
+        Flag = "ThirdAbility",
+        Callback = function(value)
+            v8 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Aim Artillery",
+        CurrentValue = false,
+        Flag = "Artillery",
+        Callback = function(value)
+            v9 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Strongest Targetting",
+        CurrentValue = false,
+        Flag = "Strongest",
+        Callback = function(value)
+            v10 = value
+        end,
+    })
+
+    v3:CreateToggle({
+        Name = "Use abilities only when enemy has more than picked health",
+        CurrentValue = false,
+        Flag = "UseAbilitiesOnlyWhenEnemyHasMoreThanHealth1",
+        Callback = function(value)
+            v11 = value
+        end,
+    })
+
+    v3:CreateSlider({
+        Name = "Use When Health Of Enemy",
+        Range = {0, 1000000},
+        Increment = 100,
+        Suffix = "Health",
+        CurrentValue = 93000,
+        Flag = "UseAbilitiesOnlyWhenEnemyHasMoreThanHealth",
+        Callback = function(value)
+            v13 = value
+        end,
+    })
+
+    v3:CreateSlider({
+        Name = "Artillery Reload Time",
+        Range = {0, 10},
+        Increment = 0.1,
+        Suffix = "Seconds",
+        CurrentValue = 1,
+        Flag = "ArtilleryReloadTime",
+        Callback = function(value)
+            v14 = value
+        end,
+    })
+
+    local v16 = game:GetService("Workspace").Game
+    local v17 = v16.Towers
+    local v18 = v16.Enemies
+    local v19 = v16.Map.Path
+    local v20 = v19.End
+    local v21 = require(game.ReplicatedStorage.TDX_Shared.Common.ResourceManager)
+    local v22 = 0
 
     while true do
-        if v33.flags.AutoAbility then
-        local v9 = v2:GetChildren()
-        local v10 = #v9
-        local v11 = v3:GetChildren()
-        local v12 = nil
-        local v13 = math.huge
-        local v14 = -math.huge
-        local v15 = false
-        local v16 = nil
-        local v17 = math.huge
+        if v5 then
+            local v23 = v17:GetChildren()
+            local v24 = v18:GetChildren()
+            local v25, v26 = nil, math.huge
+            local v27, v28 = nil, -math.huge
+            local v29 = false
 
-        if v10 > v8 then
-            v8 = v10
-        end
-
-        for _, v18 in ipairs(v11) do
-            local v19 = nil
-            local v20 = v18:GetDescendants()
-
-            for _, v21 in ipairs(v20) do
-                if v21:IsA("Part") and (v21.Name == "Root" or v21.Name == "RootPart") then
-                    v19 = v21
-                    break
-                end
+            if #v23 > v22 then
+                v22 = #v23
             end
 
-            if v19 then
-                local v22 = v7.GetEnemyConfig(v18.Name)
-                local v23 = v22 and v22.Health or 0
-
-                if v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
-                    if v23 > (tonumber(v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth) or v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth == "" and 1000) then
-                        v15 = true
-                    end                    
-                end
-
-                if v33.flags.Strongest then
-                    if v23 > v14 then
-                        v14 = v23
-                        v12 = v19
-                    end
-                else
-                    local v24 = v19.Position
-                    local v25 = (v24 - v6.Position).Magnitude
-                    if v25 < v13 then
-                        v13 = v25
-                        v12 = v19
-                    end
-                end
-            end
-        end
-
-        if v12 then
-            local v26 = v12.Position
-
-            for _, v27 in ipairs(v1.Map.Zones.Path:GetChildren()) do
-                if v27.Name == "Part" then
-                local v28 = (v27.Position - v26).Magnitude
-                if v28 < v17 then
-                    v17 = v28
-                    v16 = v27
-                end
-            end
-        end
-
-            if v16 then
-                local v29 = CFrame.new(v26.X, v16.Position.Y, v26.Z)
-                local v30 = Vector3.new(v26.X, v16.Position.Y, v26.Z)
-
-                if v33.flags.Artillery then
-                    for v31 = 1, v8 do
-                        coroutine.wrap(function()
-                            game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v31, v30)
-                        end)()
+            for _, v30 in ipairs(v24) do
+                local v31 = nil
+                for _, v32 in ipairs(v30:GetDescendants()) do
+                    if v32:IsA("Part") and (v32.Name == "Root" or v32.Name == "RootPart") then
+                        v31 = v32
+                        break
                     end
                 end
 
-                if v33.flags.UseAbilitiesOnlyWhenEnemyHasMoreThanHealth then
-                    if v15 then
-                        for v31 = 1, v8 do
+                if v31 then
+                    local v33 = v21.GetEnemyConfig(v30.Name)
+                    local v34 = v33 and v33.Health or 0
+
+                    if v11 then
+                        if v34 > v13 then
+                            v29 = true
+                        end
+                    else
+                        v29 = true
+                    end
+
+                    if v10 then
+                        if v34 > v28 then
+                            v28 = v34
+                            v27 = v31
+                        end
+                    else
+                        local v35 = (v31.Position - v20.Position).Magnitude
+                        if v35 < v26 then
+                            v26 = v35
+                            v25 = v31
+                        end
+                    end
+                end
+            end
+
+            local v36 = v10 and v27 or v25
+            if v36 and v29 then
+                local v37 = v36.Position
+                local v38, v39 = nil, math.huge
+
+                for _, v40 in ipairs(v16.Map.Zones.Path:GetChildren()) do
+                    if v40.Name == "Part" then
+                        local v41 = (v40.Position - v37).Magnitude
+                        if v41 < v39 then
+                            v39 = v41
+                            v38 = v40
+                        end
+                    end
+                end
+
+                if v38 then
+                    local v42 = Vector3.new(v37.X, v38.Position.Y, v37.Z)
+
+                    if v9 then
+                        for v43 = 1, v22 do
                             coroutine.wrap(function()
-                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 1, v30)
-                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 2, v30)
-                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 3, v30)
+                                game:GetService("ReplicatedStorage").Remotes.RetargetTower:InvokeServer(v43, v42)
                             end)()
                         end
                     end
-                else
-                    for v31 = 1, v8 do
+
+                    for v43 = 1, v22 do
                         coroutine.wrap(function()
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 1, v30)
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 2, v30)
-                            game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v31, 3, v30)
+                            if v6 then
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v43, 1, v42)
+                            end
+                            if v7 then
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v43, 2, v42)
+                            end
+                            if v8 then
+                                game:GetService("ReplicatedStorage").Remotes.TowerUseAbilityRequest:InvokeServer(v43, 3, v42)
+                            end
                         end)()
                     end
                 end
             end
-        end
 
-        if v33.flags.Artillery then
-            task.wait(v33.flags.ArtilleryReloadTime)
+            task.wait(v14)
         else
             task.wait(1)
         end
-    else
-        task.wait(1)
     end
-end
 end
