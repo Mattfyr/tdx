@@ -16,7 +16,7 @@ if game.PlaceId == 11739766412 then
 
     local v5, v6, v7, v8, v9, v10 = false, false, false, false, false, false
     local v11 = false
-    local v13 = 30000
+    local v13 = 93000
     local v14 = 1
 
     local v15 = v3:CreateToggle({
@@ -95,12 +95,12 @@ if game.PlaceId == 11739766412 then
     })
 
     v3:CreateSlider({
-        Name = "Artillery Reload Time",
+        Name = "Delay between using abilities",
         Range = {0, 10},
         Increment = 0.1,
         Suffix = "Seconds",
         CurrentValue = 1,
-        Flag = "ArtilleryReloadTime",
+        Flag = "DelayTime",
         Callback = function(value)
             v14 = value
         end,
