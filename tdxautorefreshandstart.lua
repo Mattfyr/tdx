@@ -1,12 +1,29 @@
+v1 = game:GetService("Players")
+v2 = game:GetService("TextChatService")
+v3 = v1.LocalPlayer
+
 if game.PlaceId == 9503261072 then
     while true do
-        if #game:GetService("Players"):GetPlayers() == 1 then
-            if not game:GetService("Players").LocalPlayer.PlayerGui.GUI.Leave.Visible then
-                game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/refresh")
-            else
-                if game:GetService("Players").LocalPlayer.PlayerGui.GUI.Leave.Visible then
-                    game:GetService("TextChatService").TextChannels:WaitForChild("RBXGeneral"):SendAsync("/start")
+        v5 = v1:GetPlayers()
+        v6 = false
+
+        for _, player in ipairs(v5) do
+            for _, name in ipairs(getgenv().v4) do  -- Use the global whitelist
+                if player.Name == name then
+                    v6 = true
+                    break
                 end
+            end
+            if v6 then
+                break
+            end
+        end
+
+        if v6 or (#v5 == 1 and v5[1] == v3) then
+            if not v3.PlayerGui.GUI.Leave.Visible then
+                v2.TextChannels:WaitForChild("RBXGeneral"):SendAsync("/refresh")
+            else
+                v2.TextChannels:WaitForChild("RBXGeneral"):SendAsync("/start")
             end
         end
         task.wait(3)
