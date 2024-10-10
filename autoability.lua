@@ -65,7 +65,7 @@ if game.PlaceId == 11739766412 then
     })
 
     v3:CreateToggle({
-        Name = "Strongest Targetting",
+        Name = "Strongest Targeting",
         CurrentValue = false,
         Flag = "Strongest",
         Callback = function(value)
@@ -127,13 +127,7 @@ if game.PlaceId == 11739766412 then
             end
 
             for _, v30 in ipairs(v24) do
-                local v31 = nil
-                for _, v32 in ipairs(v30:GetDescendants()) do
-                    if v32:IsA("Part") and (v32.Name == "Root" or v32.Name == "RootPart") then
-                        v31 = v32
-                        break
-                    end
-                end
+                local v31 = v30.Position
 
                 if v31 then
                     local v33 = v21.GetEnemyConfig(v30.Name)
@@ -153,7 +147,7 @@ if game.PlaceId == 11739766412 then
                             v27 = v31
                         end
                     else
-                        local v35 = (v31.Position - v20.Position).Magnitude
+                        local v35 = (v31 - v20.Position).Magnitude
                         if v35 < v26 then
                             v26 = v35
                             v25 = v31
@@ -164,7 +158,7 @@ if game.PlaceId == 11739766412 then
 
             local v36 = v10 and v27 or v25
             if v36 and v29 then
-                local v37 = v36.Position
+                local v37 = v36
                 local v38, v39 = nil, math.huge
 
                 for _, v40 in ipairs(v16.Map.Zones.Path:GetChildren()) do
