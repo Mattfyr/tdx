@@ -8,7 +8,7 @@ if game.PlaceId == 9503261072 then
         v6 = false
 
         for _, player in ipairs(v5) do
-            for _, name in ipairs(getgenv().v4) do  -- Use the global whitelist
+            for _, name in ipairs(getgenv().v4) do
                 if player.Name == name then
                     v6 = true
                     break
