@@ -127,30 +127,32 @@ if game.PlaceId == 11739766412 then
             end
 
             for _, v30 in ipairs(v24) do
-                local v31 = v30.Position
+                if v30.Name ~= "Arrow" then
+                    local v31 = v30.Position
 
-                if v31 then
-                    local v33 = v21.GetEnemyConfig(v30.Name)
-                    local v34 = v33 and v33.Health or 0
+                    if v31 then
+                        local v33 = v21.GetEnemyConfig(v30.Name)
+                        local v34 = v33 and v33.Health or 0
 
-                    if v11 then
-                        if v34 > v13 then
+                        if v11 then
+                            if v34 > v13 then
+                                v29 = true
+                            end
+                        else
                             v29 = true
                         end
-                    else
-                        v29 = true
-                    end
 
-                    if v10 then
-                        if v34 > v28 then
-                            v28 = v34
-                            v27 = v31
-                        end
-                    else
-                        local v35 = (v31 - v20.Position).Magnitude
-                        if v35 < v26 then
-                            v26 = v35
-                            v25 = v31
+                        if v10 then
+                            if v34 > v28 then
+                                v28 = v34
+                                v27 = v31
+                            end
+                        else
+                            local v35 = (v31 - v20.Position).Magnitude
+                            if v35 < v26 then
+                                v26 = v35
+                                v25 = v31
+                            end
                         end
                     end
                 end
